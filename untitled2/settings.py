@@ -25,7 +25,7 @@ SECRET_KEY = 'qcd3zjvm@)f72u)c+945=r9zt1)i1^_r^naru3m%n1*6xs690)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gemran.carmon.org.il', '35.205.148.41 ']
 
 
 # Application definition
