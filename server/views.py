@@ -3,6 +3,11 @@ from django.core.serializers import serialize
 import json
 
 from .models import Word
+from .models import User
+
+def assure_connection (request):
+    answer = {"answer":"connection succeed"}
+    return JsonResponse(answer,safe=False)
 
 
 def get_data(request):
@@ -12,12 +17,19 @@ def get_data(request):
     return JsonResponse(final_data, safe=False)
 
 
-def insert_word(request, german_word, english_translation, gender):
+def get_users(request):
+    users= User.objects.all()
+    json_data = serialize("json", users)
+    final_data = json.loads(json_data)
+    return JsonResponse(final_data, safe=False)
+
+
+def insert_word(request, german_word, translation, gender):
     if Word.objects.filter(german_word=german_word.title()).exists():
         answer = "WordExists"
     else:
         try:
-            new_word = Word(german_word=german_word.title(), english_translation=english_translation.title(), gender=gender.title())
+            new_word = Word(german_word=german_word.title(), translation=translation.title(), gender=gender.title())
             new_word.save()
             answer = "Succeed"
         except ValueError:
@@ -35,3 +47,17 @@ def delete_word(request, word_id):
         answer = "Failed"
     finally:
         return JsonResponse(answer, safe=False)
+
+
+def insert_user(request, user_name, password ):
+    return JsonResponse('NOT READY',safe=False)
+
+
+#        try:
+#            new_user= User(user_name==user_name.title(), password=password.title())
+#            new_user.save()
+#            answer = "Succeed"
+#        except ValueError:
+#            answer = "Failed"
+#        return JsonResponse(answer, safe=False)
+
