@@ -6,7 +6,7 @@ from .models import Word
 from .models import User
 
 def assure_connection (request):
-    answer = {"answer":"connection succeed"}
+    answer = {"answer":True}
     return JsonResponse(answer,safe=False)
 
 
@@ -26,7 +26,7 @@ def get_users(request):
 
 def insert_word(request, german_word, translation, gender):
     if Word.objects.filter(german_word=german_word.title()).exists():
-        answer = "WordExists"
+        answer = german_word.title()+ " is already exists in your vocabulary"
     else:
         try:
             new_word = Word(german_word=german_word.title(), translation=translation.title(), gender=gender.title())
