@@ -49,8 +49,15 @@ def delete_word(request, word_id):
         return JsonResponse(answer, safe=False)
 
 
-def insert_user(request, user_name, password ):
-    return JsonResponse('NOT READY',safe=False)
+def insert_user(request, user_name, password):
+    answer = "before"
+    try:
+        new_user = User(user_name=user_name,password=password,email="fakemail@gmail.com",level=1,vocabulary="[1,2,3,4,5]")
+        new_user.save()
+        answer = "Succeed"
+    except ValueError:
+        answer ="error:"+ ValueError
+    return JsonResponse(answer ,safe=False)
 
 
 #        try:

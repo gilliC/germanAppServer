@@ -18,5 +18,5 @@ class User(models.Model):
     password = models.CharField(max_length=32)
     email = models.EmailField(max_length=250,blank=True)
     level = models.IntegerField()
-    vocbulary = models.CharField(max_length=500,blank=True)
+    vocabulary = models.CharField(max_length=500,blank=True)
 
